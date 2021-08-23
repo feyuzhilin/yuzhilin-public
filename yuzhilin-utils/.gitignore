@@ -1,0 +1,11 @@
+node_modules/
+.happypack/
+.cache-loader/
+.vscode/
+package-lock.json
+prd/
+.prettierrc
+.idea/
+yarn.lock
+yarn-error.log
+.DS_Store

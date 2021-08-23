@@ -1,0 +1,19 @@
+{
+  "name": "yuzhilin_utils",
+  "version": "1.0.1",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "build": "webpack --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "webpack": "^5.31.2",
+    "webpack-cli": "^4.6.0"
+  }
+}
