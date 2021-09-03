@@ -1,16 +1,31 @@
 const WebSocket = require('ws');
-const wss = new WebSocket.Server({
-    port: 8080
-});
+; (() => {
+    const server = new WebSocket.Server({
+        port: 8080
+    });
 
-wss.on('connection', function (ws) {
-    ws.on('message', function (message) {
-        wss.clients.forEach(c=>{
+
+    const init = () => {
+        bindEvent()
+    }
+    function bindEvent() {
+        server.on('connection', handleConnection);
+        server.on('open', handleOpen);
+    }
+    function handleOpen(e){
+        console.log("handleOpen")
+    }
+    function handleConnection(ws) {
+        ws.on('message', handleMessage)
+    }
+    function handleMessage(message) {
+        server.clients.forEach(c => {
             c.send(`${message}`, (err) => {
                 if (err) {
                     console.log(`[SERVER] error: ${err}`);
                 }
             });
         })
-    })
-});
+    }
+    init()
+})()
