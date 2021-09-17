@@ -1,4 +1,5 @@
-const { resolve } = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin"),
+    { resolve } = require("path");
 
 module.exports = {
     entry: "./src/js/index.js",
@@ -7,8 +8,18 @@ module.exports = {
         filename: "bundle.js"
     },
     devtool: "sourcemap",
+    module: {
+        rules: [
+        ]
+    },
+    plugins: [
+        new HtmlWebpackPlugin({
+            template: resolve(__dirname, "src/index.html")
+        })
+    ],
     devServer: {
         contentBase: './',
-        open: true
+        open: true,
+        host:'0.0.0.0'
     }
 }
