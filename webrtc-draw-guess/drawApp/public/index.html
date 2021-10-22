@@ -86,7 +86,7 @@
       <canvas id="canvas" width="600" height="400" style="margin: 20px 0 0 25px; background: #ffffff;">
       </canvas>
       <canvas id="timeCanvas" width="120" height="120" style="margin-left: 50px;"></canvas>
-      <!-- <video id="video" class="video" autoplay style="display: none"></video> -->
+      <video id="video" class="video" autoplay style="display: none"></video>
       <div id="center-footer" class="center-footer">
         <p id="questionTip" class="questionTip"></p>
         <input id="answer" class="answer" type="text">
@@ -540,7 +540,7 @@
         msgList.push(data)
       } else {
         for (let conn in channels) {
-          // console.log('send', option)
+          console.log('send', option,data)
           channels[conn].send(JSON.stringify({option: option, data: data}))
         }
       }
