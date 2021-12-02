@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>使用 Canvas 播放视频</title>
+  </head>
+  <body>
+    <video id="video" controls="controls" style="display: none;">
+      <source src="https://lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/byted-player-videos/1.0.0/xgplayer-demo-720p.mp4" />
+    </video>
+    <canvas
+      id="myCanvas"
+      width="460"
+      height="270"
+      style="border: 1px solid blue;"
+    ></canvas>
+    <div>
+      <button id="playBtn">播放</button>
+      <button id="pauseBtn">暂停</button>
+    </div>
+    <script>
+      const video = document.querySelector("#video");
+      const canvas = document.querySelector("#myCanvas");
+      const playBtn = document.querySelector("#playBtn");
+      const pauseBtn = document.querySelector("#pauseBtn");
+      const context = canvas.getContext("2d");
+
+      function draw() {
+        console.log("draw")
+        if (video.paused || video.ended) return;
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        context.drawImage(video, 0, 0, canvas.width, canvas.height);
+        requestAnimationFrame(draw);
+      }
+
+      playBtn.addEventListener("click", () => {
+        if (!video.paused) return;
+        video.play();
+        draw();
+      });
+
+      pauseBtn.addEventListener("click", () => {
+        if (video.paused) return;
+        video.pause();
+      });
+    </script>
+  </body>
+</html>
