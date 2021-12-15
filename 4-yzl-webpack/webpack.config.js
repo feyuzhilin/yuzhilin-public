@@ -56,7 +56,7 @@ const config = {
           },
           'cache-loader', // 获取前面 loader 转换的结果
           'css-loader',
-          'postcss-loader',
+          'postcss-loader',//样式兼容性
           'sass-loader', //use: 对应的 Loader 名称 Loader 的执行顺序是固定从后往前，
         ]
       },
