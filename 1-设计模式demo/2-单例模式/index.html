@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>单例模式</title>
+</head>
+
+<body>
+    <script>
+        //ES6
+        // class Storage {
+        //     static getInstance() {
+        //         if (!Storage.instance) {
+        //             Storage.instance = new Storage()
+        //         }
+        //         return Storage.instance
+        //     }
+        //     getItem(key) {
+        //         return localStorage.getItem(key)
+        //     }
+        //     setItem(key, value) {
+        //         localStorage.setItem(key, value)
+        //     }
+        // }
+
+
+        //ES5 闭包
+        function StorageBase() { }
+        StorageBase.prototype.getItem = function (key) {
+            return localStorage.getItem(key)
+        }
+        StorageBase.prototype.setItem = function (key, value) {
+            localStorage.setItem(key, value)
+        }
+
+        const Storage = (()=>{
+            let instance = null
+            return function(){
+                if(!instance){
+                    instance =  new StorageBase()
+                }
+                return instance
+            }
+        })()
+
+        let storage1 = new Storage()
+        let storage2 = new Storage()
+        storage1.setItem('name', '李雷')
+        // 李雷
+        console.log(storage1.getItem('name'))
+        // 也是李雷
+        console.log(storage2.getItem('name'))
+    </script>
+</body>
+
+</html>

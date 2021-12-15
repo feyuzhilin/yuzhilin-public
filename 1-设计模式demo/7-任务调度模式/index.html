@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>scheduler</title>
+</head>
+
+<body>
+  <script>
+    class Scheduler {
+      constructor(maxCount = 1) {
+        //线程数量
+        this.maxCount = maxCount;
+        this.list = []
+        this.index = 0;
+      }
+
+      add(fn) {
+        this.list.push(fn);
+        return this
+      }
+
+      start() {
+        for (let i = 0; i < this.maxCount; i++) {
+          this.request();
+        }
+      }
+
+      request() {
+        if (!this.list || !this.list.length || this.index >= this.maxCount) {
+          return;
+        }
+        this.index++;
+        const fn = this.list.shift();
+        fn().then(() => {
+          this.index--;
+          this.request();
+        });
+      }
+    }
+
+    //初始化
+    const scheduler = new Scheduler(4);
+
+
+    function timeout(time) {
+      return new Promise((resolve) => {
+        setTimeout(resolve, time);
+      });
+    }
+
+    function addTask(time, order) {
+      scheduler.add(() =>
+        timeout(time).then(() => {
+          console.log(order);
+        })
+      );
+    }
+
+    addTask(1000, 1);
+    addTask(1000, 2);
+    addTask(1000, 3);
+    addTask(1000, 4);
+    addTask(1000, 5);
+    addTask(1000, 6);
+    addTask(1000, 7);
+    addTask(1000, 8);
+
+    scheduler.start()
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let arr = [
+            {
+                a: 1,
+                children: [
+                    {
+                        a: 2,
+                        children: [
+                            { a: 5 },
+                            { a: 6 }
+                        ]
+
+                    },
+                    { a: 7 }
+                ]
+            },
+            {
+                a: 3
+            },
+            {
+                a: 4
+            }
+        ]
+        function find(ops) {
+            if (!(ops instanceof Array)) return;
+            let result = [];
+            ops.forEach(item => {
+                if (item instanceof Object) {
+                    result.push(item.a);
+                    if (item.children) {
+                        return result.push(...find(item.children))
+                    }
+                }
+            })
+            return result;
+        }
+        // console.log(find(arr))
+    </script>
+</body>
+
+</html>

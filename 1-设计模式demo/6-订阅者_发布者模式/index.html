@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>订阅者发布者模式</title>
+</head>
+<style>
+
+</style>
+
+<body>
+</body>
+<script src="./index.js"></script>
+<script>
+    const eventBus = new EmitEvent()
+    eventBus.on('init', (num) => {
+        console.log(num)
+    })
+    eventBus.on('init2', (num) => {
+        console.log(num + num)
+    })
+    eventBus.once('init3', (num) => {
+        console.log(num + num + num)
+    })
+    eventBus.emit('init3', 4)
+    eventBus.emit('init3', 4)
+</script>
+
+</html>

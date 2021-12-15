@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Object.create</title>
+</head>
+
+<body>
+    <script>
+        
+        //思路：将传入的对象作为原型
+
+        function myObjectCreate(obj) {
+            function F(){}
+            F.prototype = obj
+            return new F()
+        }
+
+        
+        //测试
+
+        let Obj = {
+            name: 'lin',
+            age: '18'
+        }
+        let testObj = myObjectCreate(Obj)
+        testObj.getName = function () {
+            console.log(`我是${this.name}，今年${this.age}岁`)
+        }
+        testObj.getName()
+    </script>
+</body>
+
+</html>

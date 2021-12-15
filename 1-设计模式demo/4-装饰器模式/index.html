@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>装饰器模式弹框</title>
+</head>
+<style>
+    #modal {
+        height: 200px;
+        width: 200px;
+        line-height: 200px;
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        border: 1px solid black;
+        text-align: center;
+    }
+</style>
+
+<body>
+    <button id='open'>打开弹框</button>
+    <button id='close'>关闭弹框</button>
+</body>
+<script>
+    //核心逻辑，这里采用了闭包思路来实现单例模式
+    const Modal = (function () {
+        let modal = null
+        return function () {
+            if (!modal) {
+                modal = document.createElement('div')
+                modal.innerHTML = '我是一个全局唯一的Modal'
+                modal.id = 'modal'
+                modal.style.display = 'none'
+                document.body.appendChild(modal)
+            }
+            return modal
+        }
+    })()
+
+
+    function init() {
+        const openButton = new OpenButton()
+        const decoratorOpenButton = new Decorator(openButton)
+        // 点击打开按钮展示模态框
+        document.getElementById('open').addEventListener('click', function () {
+            // 未点击则不创建modal实例，避免不必要的内存占用;此处不用 new Modal 的形式调用也可以，和 Storage 同理
+            // openModal()
+            // changeButtonStatus()
+            decoratorOpenButton.onClick()
+        })
+
+        // 点击关闭按钮隐藏模态框
+        document.getElementById('close').addEventListener('click', function () {
+            const modal = new Modal()
+            if (modal) {
+                modal.style.display = 'none'
+            }
+        })
+    }
+
+    //定义打开按钮
+    class OpenButton {
+        //打开弹窗
+        onClick() {
+            const modal = new Modal()
+            modal.style.display = 'block'
+        }
+    }
+
+
+    //定义一个装饰器
+    class Decorator {
+        constructor(open_button) {
+            this.open_button = open_button
+        }
+
+        onClick() {
+            this.open_button.onClick()
+            this.changeButtonStatus()
+        }
+
+        changeButtonStatus() {
+            this.changeButtonText()
+            this.disableButton()
+        }
+
+        disableButton() {
+            const btn = document.getElementById('open')
+            btn.setAttribute("disabled", true)
+        }
+
+        changeButtonText() {
+            const btn = document.getElementById('open')
+            btn.innerText = '快去登录'
+        }
+    }
+
+
+    init()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //修改文案
+    function changeButtonText(text) {
+        const btn = document.getElementById('open')
+        btn.innerText = text
+    }
+
+    //修改按钮样式
+    function disableButton() {
+        const btn = document.getElementById('open')
+        btn.setAttribute("disabled", true)
+    }
+
+    //修改按钮状态
+    function changeButtonStatus() {
+        changeButtonText('快去登录')
+        disableButton()
+    }
+</script>
+
+</html>

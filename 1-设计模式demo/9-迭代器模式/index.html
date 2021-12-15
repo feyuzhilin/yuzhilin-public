@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>迭代器模式</title>
+</head>
+
+<body>
+    <script>
+        // //实现一个自己的迭代器 (内部迭代器)
+        // var each = function (ary, callback) {
+        //     for (var i = 0; i < ary.length; i++) {
+        //         callback.call(ary[i], i, ary[i])
+        //     }
+        // }
+        // each([1, 2, 3], function (i, v) {
+        //     console.log(this)
+        //     console.log(v)
+        // })
+
+        // //需求:比较两个数组的元素是否完全相等(内部迭代)
+        // var compare = function (ary1, ary2) {
+        //     if (ary1.length !== ary2.length) {
+        //         throw new Error("ary1,ary2不相等")
+        //     }
+        //     each(ary1, function (i, v) {
+        //         if (v !== ary2[i]) {
+        //             throw new Error("ary1,ary2不相等")
+        //         }
+        //     })
+        //     alert("ary1,ary2相等")
+        // }
+        // compare([1, 2, 3,4], [1, 2, 3, 4])
+
+
+        //实现一个外部迭代器
+        var iterator = function (obj) {
+            var current = 0
+            var next = function () {
+                current += 1
+            }
+            var isDown = function () {
+                return current >= obj.length
+            }
+            var getCurrentItem = function () {
+                return obj[current]
+            }
+
+            return {
+                next,
+                isDown,
+                getCurrentItem,
+                length: obj.length
+            }
+        }
+        let iterator1 = iterator([2, 3, 4])
+        let iterator2 = iterator([2, 3, 4])
+
+        //需求:比较两个数组的元素是否完全相等(外部迭代)
+        var compare2 = function (iterator1, iterator2) {
+            if (iterator1.length !== iterator2.length) {
+                throw new Error("iterator1,iterator2不相等")
+            }
+            while (!iterator1.isDown() && !iterator2.isDown()) {
+                if (iterator1.getCurrentItem() !== iterator2.getCurrentItem()) {
+                    throw new Error("iterator1,iterator2不相等")
+                }
+                iterator1.next()
+                iterator2.next()
+            }
+            alert('iterator1,iterator2相等')
+        }
+        compare2(iterator1, iterator2)
+    </script>
+</body>
+
+</html>

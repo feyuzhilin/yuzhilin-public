@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>document-getElemnetByIdindex</title>
+</head>
+
+<body>
+    <div id="1"></div>
+    <div id="2">
+        <h1 id="1"></h1>
+    </div>
+    <p id="1"></p>
+    <script>
+        //请实现一个 find 函数，功能等同于 document.getElementById 。
+        // 方法1，手动写递归。
+        const nodes = document.body; // 万物起点，获取 body DOM
+
+        function getId(node, nodeIdMap) {
+            if (node) {
+                if (node.id) nodeIdMap[node.id] = node; // 如果 id 属性存在，则把该DOM存入 Map
+                const children = node.children;
+                for (let i = 0; i < children.length; i++) { // 循环
+                    getId(children[i], nodeIdMap) // + 递归
+                }
+            }
+            return nodeIdMap
+        }
+
+        const ids = getId(nodes, {})
+        console.log(ids)
+        const findId = (id) => ids[id]
+        console.log(findId('1'),"findId('1')")
+        console.log(document.getElementById('1'),"document.getElementById('1')")
+    </script>
+</body>
+
+</html>

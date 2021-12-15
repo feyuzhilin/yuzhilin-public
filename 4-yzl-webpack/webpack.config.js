@@ -12,7 +12,7 @@ const glob = require('glob'); // 文件匹配模式
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin //分析构建结果
 
 // 路径处理方法
-function resolve(dir){
+function resolve(dir) {
   return path.join(__dirname, dir);
 }
 const PATHS = {
@@ -87,7 +87,7 @@ const config = {
       filename: 'css/[name].[hash:8].css'
     }),
     new PurgecssWebpackPlugin({
-      paths: glob.sync(`${PATHS.src}/**/*`, {nodir: true})
+      paths: glob.sync(`${PATHS.src}/**/*`, { nodir: true })
     }),
     // new BundleAnalyzerPlugin({
     //   // analyzerMode: 'disabled',  // 不启动展示打包报告的http服务器
@@ -100,7 +100,7 @@ const config = {
     port: 8080, // 端口号
     // open:true  // 是否自动打开浏览器
   },
-  resolve:{
+  resolve: {
     // 配置别名
     alias: {
       '~': resolve('src'),
@@ -119,7 +119,26 @@ const config = {
       // 添加 css 压缩配置
       new OptimizeCssAssetsPlugin({}),
       // 添加 js 压缩配置
-      new TerserPlugin({})
+      new TerserPlugin({
+        cache: true,
+        parallel: true,
+        sourceMap: false,
+        extractComments: false, // 不将注释提取到单独的文件中
+        terserOptions: {
+          warnings: false,
+          compress: {
+            drop_console: true
+          },
+          mangle: true,
+          output: {
+            comments: false,
+          },
+          toplevel: false,
+          nameCache: null,
+          ie8: false,
+          keep_fnames: false
+        }
+      })
     ]
   },
 }

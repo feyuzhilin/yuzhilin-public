@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>实现instanceof</title>
+</head>
+<body>
+    <script>
+        //思路：instanceof 运算符用于检测构造函数的 prototype 属性是否出现在某个实例对象的原型链上。
+        function myInstansof(object,constructor){
+            let proto = Object.getPrototypeOf(object)
+            let prototype = constructor.prototype
+            while(true){
+                if (!proto) return false;
+                if(proto === prototype) return true;
+                proto = Object.getPrototypeOf(proto)
+            }
+        }
+
+
+        //测试
+        function Person(){
+            this.name = 'lin'
+        }
+        function Person1(){
+            this.name = 'lin'
+        }
+        let p = new Person()
+        let p2 = Object.create(p)
+        
+       console.log(myInstansof(p2,Person))
+    </script>
+</body>
+</html>
