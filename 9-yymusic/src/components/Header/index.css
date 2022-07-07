@@ -1,0 +1,24 @@
+.header-wrap{
+  width: 100vw;
+  background: #242424;
+  display: flex;
+  justify-content:center;
+}
+.header {
+  width: 1100px;
+  margin: 0 auto;
+  height: 70px;
+  box-sizing: border-box;
+  border-bottom: 1px solid #000;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background: #242424;
+}
+.item-link{
+  height: 100%;
+  line-height: 70px;
+  color: #fff;
+  font-size: 20px;
+}
+
