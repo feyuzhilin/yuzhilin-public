@@ -1,26 +1,24 @@
-import React, { Component } from "react"
-import "./index.css"
-export default class Content extends Component{
-    constructor(props){
-        super(props)
-        this.state = {
-            contentList:[
-                { id: 0, text:'内容1'},
-                { id: 1, text:'内容2'},
-                { id: 2, text:'内容3'},
-                { id: 3, text:'内容4'},
-                { id: 4, text:'内容5'},
-                { id: 5, text:'内容6'},
-                { id: 6, text:'内容7'},
-                { id: 7, text:'内容8'},
-            ]
-        }
-    }
-    render() {
-        return (
-            <div className="content-wrap">
-                {this.state.contentList.map(item=> <p className="item-music" key={item.id}>{item.text}</p>)}
-            </div>
-        );
-    }
-}
+import "./index.css";
+import { useState } from "react";
+const Content = () => {
+  const [musicList, setMusicList] = useState([]);
+  const [id, setId] = useState(0);
+  const loadList = () => {
+    setId(id+1);
+    musicList.push({ id: id, text: `内容${id}` });
+    setMusicList([...musicList]);
+  };
+  return (
+    <div className="content-wrap">
+      {musicList.map((item) => (
+        <p className="item-music" key={item.id}>
+          {item.text}
+        </p>
+      ))}
+      <div className="load-list" onClick={loadList}>
+        加载更多
+      </div>
+    </div>
+  );
+};
+export default Content;
