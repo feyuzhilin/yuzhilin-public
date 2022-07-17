@@ -1,11 +1,11 @@
 import Header from "./components/Header";
+import Tab from "./components/Tab";
 import Content from "./components/Content";
-import Banner from "./components/Banner";
-
+import "./index.css";
 const App = () => (
   <div className="App">
     <Header></Header>
-    <Banner></Banner>
+    <Tab></Tab>
     <Content></Content>
   </div>
 );

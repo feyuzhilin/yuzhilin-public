@@ -1,24 +1,28 @@
-.header-wrap{
-  width: 100vw;
-  background: #242424;
+.header-wrap {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
   display: flex;
-  justify-content:center;
-}
-.header {
-  width: 1100px;
-  margin: 0 auto;
-  height: 70px;
-  box-sizing: border-box;
-  border-bottom: 1px solid #000;
-  display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: space-around;
-  background: #242424;
-}
-.item-link{
-  height: 100%;
-  line-height: 70px;
-  color: #fff;
-  font-size: 20px;
+  padding: 0 10px;
+  width: 100%;
+  height: 84px;
+  background-color: #d43c33;
+  box-sizing: border-box;
 }
 
+.title {
+  color: #ffffff;
+  font-size: 23px;
+  text-align: center;
+}
+
+.download-btn {
+  color: #d43c33;
+  font-size: 18px;
+  background-color: #fff;
+  padding: 5px 15px;
+  border-radius: 84px;
+}

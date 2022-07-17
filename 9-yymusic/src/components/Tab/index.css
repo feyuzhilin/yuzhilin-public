@@ -1,0 +1,17 @@
+.tab-wrap{
+    width: 100%;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border-bottom: 1px solid #ccc;
+}
+.tab-item{
+    height: 40px;
+    line-height: 40px;
+    position: relative;
+}
+.active{
+    border-bottom: 2px solid #dd001b;
+    color: #dd001b;
+}
