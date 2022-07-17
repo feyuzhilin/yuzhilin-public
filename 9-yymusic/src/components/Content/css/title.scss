@@ -1,0 +1,17 @@
+.title-wrap {
+    height: 20px;
+    line-height: 20px;
+    font-size: 17px;
+    padding-left: 9px;
+    position: relative;
+    margin-bottom: 10px;
+    &::after {
+        content: '';
+        width: 2px;
+        height: 20px;
+        background-color: #dd001b;
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+}

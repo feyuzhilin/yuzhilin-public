@@ -1,4 +1,4 @@
-import "./css/title.css";
+import "./css/title.scss";
 const Title = (props) => {
   return (
     <div className="title-wrap">

@@ -1,10 +1,12 @@
-import "./css/index.css";
+import "./css/index.scss";
 import Title from "./Title";
 import ImgText from "./ImgText";
 import SongList from "./SongList";
-import { useState } from "react";
+import mock from "../../common/mock";
+import { useState, useEffect } from "react";
+import React from "react";
 const Content = () => {
-  const [state, setstate] = useState([
+  let initialSatet = [
     { compType: "label", title: "编辑推荐" },
     {
       compType: "image_text",
@@ -20,28 +22,36 @@ const Content = () => {
     { compType: "label", title: "最新音乐" },
     {
       compType: "song_list",
-      data: [
-        { text: "歌曲名称",subText: "薛之谦-关于你", id: 0 },
-        { text: "歌曲名称",subText: "薛之谦-关于你", id: 1 },
-        { text: "歌曲名称",subText: "薛之谦-关于你", id: 2 },
-        { text: "歌曲名称",subText: "薛之谦-关于你", id: 3 },
-        { text: "歌曲名称",subText: "薛之谦-关于你", id: 4 },
-        { text: "歌曲名称",subText: "薛之谦-关于你", id: 5 },
-      ],
     },
-  ]);
+  ];
+  const [state, setstate] = useState(initialSatet);
+  const [songState, setsongState] = useState([]);
 
-  const compCheck = comp=>{
-    if(comp.compType === "label"){
-      return <Title name={comp.title}></Title>
+  const getSongList = async () => {
+    const res = await mock();
+    setsongState(res.result)
+  };
+
+  useEffect(() => {
+    state.forEach((item) => {
+      if (item.compType === "song_list") {
+        getSongList();
+      }
+    });
+  }, []);
+
+  const compCheck = (comp) => {
+    if (comp.compType === "label") {
+      return <Title name={comp.title}></Title>;
     }
-    if(comp.compType === "image_text"){
-      return <ImgText data={comp.data}></ImgText>
+    if (comp.compType === "image_text") {
+      return <ImgText data={comp.data}></ImgText>;
     }
-    if(comp.compType === "song_list"){
-      return <SongList data={comp.data}></SongList>
+    if (comp.compType === "song_list") {
+      return <SongList data={songState}></SongList>;
     }
-  }
+  };
+
   return (
     <div className="content-wrap">
       {state.map((comp, index) => {

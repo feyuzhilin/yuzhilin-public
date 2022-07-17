@@ -1,0 +1,31 @@
+.footer-wrap {
+  position: relative;
+  padding-top: 53.3%;
+  margin-top: 4px;
+  background: url(//s3.music.126.net/mobile-new/img/recommand_bg_2x.png?d045faf…=) no-repeat;
+  background-size: contain;
+
+  .inner-wrap {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    z-index: 1;
+    text-align: center;
+    .logo{
+      font-size: 30px;
+      padding-top: 16.9%;
+    }
+    .openapp {
+      line-height: 38px;
+      border: 1px solid #d33a31;
+      border-radius: 38px;
+      font-size: 16px;
+      color: #d33a31;
+      margin: 15px 37px 5px;
+      text-align: center;
+    }
+  }
+
+}

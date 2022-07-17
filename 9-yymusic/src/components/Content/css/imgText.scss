@@ -1,0 +1,13 @@
+.img-text-wrap {
+    display: grid;
+    flex-wrap: wrap;
+    grid-template-columns: 33.3% 33.3% 33.3%;
+    grid-column-gap:2px;
+
+    .img-text-item {
+        img {
+            width: 100%;
+        }
+    }
+
+}
