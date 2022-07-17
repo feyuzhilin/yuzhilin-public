@@ -21,7 +21,7 @@
 
 <script>
 export default {
-  name: "LinButton",
+  name: "lin-button",
   // 封装一个通用的组件，会对props做一个约束，props进行校验
   props: {
     type: {

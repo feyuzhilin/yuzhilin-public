@@ -1,7 +1,9 @@
 import Button from './button.vue'
+import Image from './image.vue'
 
 const components = [
-  Button
+  Button,
+  Image
 ]
 
 const install = function (Vue) {

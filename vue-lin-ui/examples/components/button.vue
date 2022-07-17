@@ -20,7 +20,7 @@
 
 <script>
 export default {
-  name: "LinButton",
+  name: "lin-button",
   props: {
     type: {
       // 数据类型： 字符串
